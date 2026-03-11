@@ -4,7 +4,20 @@ A terminal-based AI agent written in Zig, designed to run on legacy hardware —
 
 Communicates with [Ollama](https://ollama.com/) or any OpenAI-compatible API over local HTTP. Supports function calling (tool use) and provides a colored TUI using Win32 Console API with CP437 box-drawing characters.
 
-![micro-agent on Windows XP](docs/screenshot.png)
+### System Diagnostics
+![System diagnostics](docs/screen-sysinfo.png)
+
+### Process & CPU Analysis
+![CPU diagnostics](docs/screen-cpu.png)
+
+### Network Troubleshooting
+![Network diagnostics](docs/screen-network.png)
+
+### Disk & Memory Check
+![Disk and memory](docs/screen-disk-memory.png)
+
+### Tool Execution
+![Tool execution](docs/screen-exec.png)
 
 ## Features
 
