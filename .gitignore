@@ -1,0 +1,25 @@
+zig-out/
+zig-cache/
+.zig-cache/
+*.o
+*.d
+*.exe
+config.json
+
+# Build directories
+xp-build/
+xp-final/
+dist/
+
+# Zig downloads
+zig-*.zip
+zig-*-windows-*/
+zig-*-linux-*/
+zig-*-macos-*/
+
+# Build logs
+build_*.txt
+*.log
+
+# Internal dev notes
+fix.md

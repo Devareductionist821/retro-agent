@@ -1,0 +1,21 @@
+{
+  "agent": {
+    "name": "micro-agent",
+    "mode": "interactive",
+    "system_prompt": "You are an AI assistant for legacy hardware systems. Use the available tools to help diagnose and manage the system.",
+    "max_history": 100
+  },
+  "transport": {
+    "api": {
+      "provider": "openai",
+      "api_key": "",
+      "model": "llama3",
+      "base_url": "http://localhost:11434"
+    }
+  },
+  "security": {
+    "require_approval": false,
+    "max_exec_timeout_ms": 30000
+  },
+  "debug_mode": false
+}
