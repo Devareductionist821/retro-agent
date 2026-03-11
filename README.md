@@ -46,6 +46,28 @@ Communicates with [Ollama](https://ollama.com/) or any OpenAI-compatible API ove
 - [Ollama](https://ollama.com/) running on a separate machine on the same network (or any OpenAI-compatible endpoint). Ollama cannot run on Windows XP — you need a modern PC or server to host the LLM, and point micro-agent to it via `--url` or `config.json`
 - A model that supports function calling / tool use. Recommended: `gpt-oss:20b-cloud` or larger. Other compatible models: `llama3`, `qwen2`, `mistral`, `command-r`. Models without tool support will not be able to execute built-in tools.
 
+### Setting up Ollama for network access
+
+By default Ollama only listens on `127.0.0.1`. To accept connections from other machines on the network, set `OLLAMA_HOST` to `0.0.0.0` on the machine running Ollama:
+
+**Windows:**
+```
+setx OLLAMA_HOST 0.0.0.0
+ollama serve
+```
+
+**Linux:**
+```
+OLLAMA_HOST=0.0.0.0 ollama serve
+```
+
+Or permanently via systemd (`/etc/systemd/system/ollama.service`):
+```
+Environment="OLLAMA_HOST=0.0.0.0"
+```
+
+Then from the XP machine, point to `http://<OLLAMA_HOST_IP>:11434`.
+
 ## Quick Start
 
 ```bash
